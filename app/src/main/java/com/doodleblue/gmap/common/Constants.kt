@@ -21,4 +21,10 @@ interface Constants {
         }
 
     }
+
+    interface PlacesApi {
+        companion object {
+            const val PLACES_API_KEY = "AIzaSyANB4Mr_JLOt6JynTMmIc88ThFRwxfay4E"
+        }
+    }
 }

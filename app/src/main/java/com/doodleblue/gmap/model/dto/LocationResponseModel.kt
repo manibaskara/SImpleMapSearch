@@ -1,15 +1,15 @@
 package com.doodleblue.gmap.model.dto
 
+import com.doodleblue.gmap.model.dto.response.BaseResponse
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
 data class LocationResponseModel(
     @field:Json(name = "predictions")
     var predictions: MutableList<Prediction>,
     @field:Json(name = "status")
     var status: String
-) {
+) :BaseResponse() {
     @JsonClass(generateAdapter = true)
     data class Prediction(
         @field:Json(name = "description")
