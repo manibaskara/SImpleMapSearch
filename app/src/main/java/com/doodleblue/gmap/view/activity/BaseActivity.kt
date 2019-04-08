@@ -4,14 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
-import com.doodleblue.gmap.R
 import com.doodleblue.gmap.presenter.ipresenter.IPresenter
 import com.doodleblue.gmap.view.iview.IView
 
-class BaseActivity<B : ViewDataBinding, T : IPresenter> : AppCompatActivity(), IView {
+abstract class BaseActivity<B : ViewDataBinding, T : IPresenter> : AppCompatActivity(), IView {
 
     protected var bViewDataBinding: B? = null
     protected var iPresenter: T? = null
@@ -19,11 +20,14 @@ class BaseActivity<B : ViewDataBinding, T : IPresenter> : AppCompatActivity(), I
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_map)
+        bViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        iPresenter = onInitializePresenter()
+        iPresenter?.onCreate(intent.extras)
+
     }
 
     override fun showMessage(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun getActivity(): FragmentActivity? {
@@ -34,4 +38,9 @@ class BaseActivity<B : ViewDataBinding, T : IPresenter> : AppCompatActivity(), I
         mParentView =window.decorView.findViewById(android.R.id.content)
         return super.onCreateView(name, context, attrs)
     }
+
+
+    abstract fun getLayoutId(): Int
+
+    abstract fun onInitializePresenter(): T
 }
