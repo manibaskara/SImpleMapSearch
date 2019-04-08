@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
-import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -17,14 +16,15 @@ abstract class BaseActivity<B : ViewDataBinding, T : IPresenter> : AppCompatActi
 
     protected var bViewDataBinding: B? = null
     protected var iPresenter: T? = null
-    protected var mParentView: View?=null
+    protected var mParentView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
         iPresenter = onInitializePresenter()
         iPresenter?.onCreate(intent.extras)
-
+        if (iPresenter != null)
+            onPresenterCreated()
     }
 
     override fun showMessage(message: String) {
@@ -36,7 +36,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : IPresenter> : AppCompatActi
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        mParentView =window.decorView.findViewById(android.R.id.content)
+        mParentView = window.decorView.findViewById(android.R.id.content)
         return super.onCreateView(name, context, attrs)
     }
 
