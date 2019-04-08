@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -38,7 +39,6 @@ abstract class BaseActivity<B : ViewDataBinding, T : IPresenter> : AppCompatActi
         mParentView =window.decorView.findViewById(android.R.id.content)
         return super.onCreateView(name, context, attrs)
     }
-
 
     abstract fun getLayoutId(): Int
 
