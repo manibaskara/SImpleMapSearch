@@ -1,5 +1,3 @@
 package com.doodleblue.gmap.view.iview
 
-interface ISaveLocationListener : IBaseListener {
-
-}
+interface ISaveLocationListener : IBaseListener
