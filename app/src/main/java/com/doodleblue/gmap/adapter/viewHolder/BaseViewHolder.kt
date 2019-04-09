@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseViewHolder<T, VB : ViewDataBinding> : RecyclerView.ViewHolder {
 
     protected lateinit var viewDataBinding: VB
+    open var lastItemPosition = 0
+
 
     var data: T? = null
         set(value) {

@@ -6,4 +6,6 @@ import com.doodleblue.gmap.model.imodel.IRepositoryModel
 interface IPresenter : IRepositoryModel {
 
     fun onCreate(bundle: Bundle?)
+    fun showNetworkUnavailable()
+
 }

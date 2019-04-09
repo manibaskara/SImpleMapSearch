@@ -15,7 +15,8 @@ abstract class BaseRecyclerAdapter<T, V: BaseViewHolder<T, * >>(var data: Mutabl
     }
 
     override fun onBindViewHolder(holder: V, position: Int) {
-    holder.data = getItem(position)
+        holder.lastItemPosition = itemCount - 1
+        holder.data = getItem(position)
     }
 
     @Throws(IndexOutOfBoundsException::class)
