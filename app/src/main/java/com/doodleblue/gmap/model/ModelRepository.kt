@@ -1,9 +1,6 @@
 package com.doodleblue.gmap.model
 
-import android.content.ContentValues
 import android.content.Context
-import android.location.Address
-import android.util.Log
 import com.doodleblue.gmap.common.Constants
 import com.doodleblue.gmap.model.dto.response.AutoCompleteResponse
 import com.doodleblue.gmap.model.dto.response.BaseResponse
@@ -11,22 +8,16 @@ import com.doodleblue.gmap.model.imodel.IRepositoryModel
 import com.doodleblue.gmap.model.webservice.ApiClient
 import com.doodleblue.library.CustomException
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
-import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import android.location.Geocoder
-import java.io.IOException
 
 
 class ModelRepository(context: Context, private var iRepositoryModel: IRepositoryModel) {
@@ -78,15 +69,14 @@ class ModelRepository(context: Context, private var iRepositoryModel: IRepositor
             .build()
 
         placesClient.findAutocompletePredictions(request).addOnSuccessListener { response ->
-            for (prediction in response.getAutocompletePredictions()) {
+            for (prediction in response.autocompletePredictions) {
                 val dataResponse: MutableList<AutocompletePrediction> = response.autocompletePredictions
                 iRepositoryModel.returnData(dataResponse)
 
             }
         }.addOnFailureListener { exception ->
             if (exception is ApiException) {
-                val apiException = exception
-                iRepositoryModel.showMessage(apiException.localizedMessage)
+                iRepositoryModel.showMessage(exception.localizedMessage)
             }
         }
     }
@@ -104,13 +94,13 @@ class ModelRepository(context: Context, private var iRepositoryModel: IRepositor
                 .build()
 
             placesClient.findAutocompletePredictions(request).addOnSuccessListener { response ->
-                for (prediction in response.getAutocompletePredictions()) {
+                for (prediction in response.autocompletePredictions) {
                     val dataResponse: MutableList<AutocompletePrediction> = response.autocompletePredictions
                     dataResponse.let { it1 -> it.onNext(it1 as T) }
                 }
             }.addOnFailureListener({ exception ->
                 if (exception is ApiException) {
-                    val apiException = exception as ApiException
+                    val apiException = exception
                     //Toast.makeText(applicationContext, apiException.toString(), Toast.LENGTH_SHORT).show()
                 }
             })

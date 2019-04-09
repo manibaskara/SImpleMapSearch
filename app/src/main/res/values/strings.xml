@@ -2,4 +2,5 @@
     <string name="app_name">GMap</string>
     <string name="search_location">Search Location</string>
     <string name="search_results">Search Results</string>
+    <string name="save_as_practice_location">Save as Practice Location</string>
 </resources>

@@ -1,15 +1,12 @@
 package com.doodleblue.gmap.util
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 import java.io.IOException
-import java.util.*
 
 
 class CodeSnippet(val context: Context) {
@@ -37,7 +34,7 @@ class CodeSnippet(val context: Context) {
             }
 
             val location = address[0]
-            p1 = LatLng(location.getLatitude(), location.getLongitude())
+            p1 = LatLng(location.latitude, location.longitude)
 
         } catch (ex: IOException) {
 

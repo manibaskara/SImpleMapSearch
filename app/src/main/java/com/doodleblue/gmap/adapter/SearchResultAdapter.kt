@@ -5,7 +5,6 @@ import com.doodleblue.gmap.R
 import com.doodleblue.gmap.adapter.listener.BaseRecyclerListener
 import com.doodleblue.gmap.adapter.viewHolder.SearchResultViewHolder
 import com.doodleblue.gmap.databinding.InflateLocationBinding
-import com.doodleblue.gmap.model.dto.common.Prediction
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 
 /*class SearchResultAdapter(

@@ -20,9 +20,9 @@ class ApiClient(private var mContext: Context) {
         }
         return synchronized(this){
 
-            val instance_two = retrofitInstance
-            if (instance_two!=null){
-                instance_two
+            val retrofit = retrofitInstance
+            if (retrofit!=null){
+                retrofit
             } else{
                 val logging = HttpLoggingInterceptor()
                 logging.level = HttpLoggingInterceptor.Level.BODY   // set your desired log level
